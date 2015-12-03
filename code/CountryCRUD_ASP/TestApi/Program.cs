@@ -129,14 +129,16 @@ namespace TestApi
 
         // Строка запроса:
         // PUT <Адрес приложения BPMonline>/0/ServiceModel/EntityDataService.svc/ContactCollection(guid'00000000-0000-0000-0000-000000000000')
-
-        public static void UpdateExistingBpmEnyityByOdataHttpExample()
+        
+        public static void UpdateExistingBpmEnyityByOdataHttpExample(string userName, string userPassword)
         {
+            CookieContainer bpmCookieContainer;
+            Autorization(userName, userPassword, out bpmCookieContainer);
             // Id записи объекта, который необходимо изменить.
-            string contactId = "00000000-0000-0000-0000-000000000000";
+            string countryId = "a470b005-e8bb-df11-b00f-001d60e938c6";
             // Создание сообщения xml, содержащего данные об изменяемом объекте.
             var content = new XElement(dsmd + "properties",
-                    new XElement(ds + "Name", "Новое имя")
+                    new XElement(ds + "Name", "Ukraine")
             );
             var entry = new XElement(atom + "entry",
                     new XElement(atom + "content",
@@ -145,12 +147,16 @@ namespace TestApi
                     );
             // Создание запроса к сервису, который будет изменять данные объекта.
             var request = (HttpWebRequest)HttpWebRequest.Create(serverUri
-                    + "ContactCollection(guid'" + contactId + "')");
-            request.Credentials = new NetworkCredential("BPMUserName", "BPMUserPassword");
+                    + "CountryCollection(guid'" + countryId + "')");
+            request.CookieContainer = bpmCookieContainer;
+            //request.Credentials = new NetworkCredential("Сницаренко Сергей", "tqn5496O");
             request.Method = "PUT";
             request.Accept = "application/atom+xml";
             request.ContentType = "application/atom+xml;type=entry";
             // Запись сообщения xml в поток запроса.
+            Console.WriteLine("=============================");
+            Console.WriteLine(entry.ToString());
+            Console.WriteLine("=============================");
             using (var writer = XmlWriter.Create(request.GetRequestStream()))
             {
                 entry.WriteTo(writer);
@@ -161,12 +167,14 @@ namespace TestApi
                 // Обработка результата выполнения операции.
             }
         }
-
+        
         static void Main(string[] args)
         {
             GetOdataCollectionByAuthByHttpExample("Сницаренко Сергей", "tqn5496O");
             //CreateBpmEntityByOdataHttpExample("Сницаренко Сергей", "tqn5496O");
+            UpdateExistingBpmEnyityByOdataHttpExample("Сницаренко Сергей", "tqn5496O");
             GetOdataCollectionByAuthByHttpExample("Сницаренко Сергей", "tqn5496O");
+
             Console.ReadLine();
         }
     }
