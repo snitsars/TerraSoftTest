@@ -1,0 +1,5 @@
+https://serhiisnitsarenko.bpmonline.com/0/Nui/ViewModule.aspx#IntroPage/SystemDesigner
+
+http://academy.terrasoft.ua/documents/docs/technic/SDK/7.6.0/WorkWithBpmByOdataHttp.html
+
+http://academy.terrasoft.ua/documents/?product=SDK&ver=7.6.0
