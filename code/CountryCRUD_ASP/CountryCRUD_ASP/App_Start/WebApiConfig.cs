@@ -25,6 +25,9 @@ namespace CountryCRUD_ASP
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // отключаем возможность вывода данных в формате xml
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }
 }

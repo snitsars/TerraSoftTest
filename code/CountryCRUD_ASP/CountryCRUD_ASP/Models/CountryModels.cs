@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace CountryCRUD_ASP.Models
 {
-    public class Country
+    public class CountryModels
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
