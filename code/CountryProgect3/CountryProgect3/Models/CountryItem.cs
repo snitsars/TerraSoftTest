@@ -15,7 +15,7 @@ namespace CountryProgect3.Models
         IEnumerable<CountryItem> GetAll();
         CountryItem Find(string key);
         CountryItem Remove(string key);
-        void Update(CountryItem item);
+        void Update(string countryId);
     }
 
     public class CountriesRepository : ICountriesRepository
@@ -119,12 +119,12 @@ namespace CountryProgect3.Models
             throw new NotImplementedException();
         }
 
-        public void Update(CountryItem item)
+        public void Update(string countryId)
         {
             
             Autorization(out _bpmCookieContainer);
             // Id записи объекта, который необходимо изменить.
-            string countryId = "a470b005-e8bb-df11-b00f-001d60e938c6";
+            
             // Создание сообщения xml, содержащего данные об изменяемом объекте.
             var content = new XElement(dsmd + "properties",
                     new XElement(ds + "Name", "Ukraine")
